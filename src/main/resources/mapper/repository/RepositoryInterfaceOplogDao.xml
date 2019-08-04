@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mockst.mocking.module.repository.dao.RepositoryInterfaceOplogDao">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.mockst.mocking.module.repository.entity.RepositoryInterfaceOplogEntity" id="repositoryInterfaceOplogMap">
+        <result property="id" column="id"/>
+        <result property="interfaceId" column="interface_id"/>
+        <result property="opUserId" column="op_user_id"/>
+        <result property="opType" column="op_type"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <sql id="Relevance_Base_Column_List">
+    rio.id as rio_id,
+    rio.interface_id as rio_interface_id,
+    rio.op_user_id as rio_op_user_id,
+    rio.op_type as rio_op_type,
+    rio.create_time as rio_create_time,
+    rio.update_time as rio_update_time
+    </sql>
+    <!-- Custom Generate Code Start-->
+    <!-- Custom Generate Code End-->
+</mapper>

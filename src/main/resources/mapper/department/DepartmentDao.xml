@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mockst.mocking.module.department.dao.DepartmentDao">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.mockst.mocking.module.department.entity.DepartmentEntity" id="departmentMap">
+        <result property="id" column="id"/>
+        <result property="departmentName" column="department_name"/>
+        <result property="remark" column="remark"/>
+        <result property="creatorId" column="creator_id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <sql id="Relevance_Base_Column_List">
+    d.id as d_id,
+    d.department_name as d_department_name,
+    d.creator_id as d_creator_id,
+    d.remark as d_remark,
+    d.create_time as d_create_time,
+    d.update_time as d_update_time
+    </sql>
+    <!-- Custom Generate Code Start-->
+    <select id="findByCondition" resultType="java.util.Map">
+        SELECT d.*,
+        u.real_name creator_name
+        FROM tb_department d LEFT JOIN tb_user u on d.creator_id = u.id
+        <where>
+            <if test="departmentName!=null and departmentName!=''">
+                AND d.department_name LIKE CONCAT('%',#{departmentName},'%')
+            </if>
+            <if test="startDate!=null and startDate!=''">
+                <![CDATA[ AND d.create_time >= DATE_FORMAT(#{startDate},'%Y-%m-%d 00:00:00') ]]>
+            </if>
+            <if test="endDate!=null and endDate!=''">
+                <![CDATA[ AND d.create_time <= DATE_FORMAT(#{endDate},'%Y-%m-%d 23:59:59') ]]>
+            </if>
+        </where>
+        order by d.update_time desc
+    </select>
+    <!-- Custom Generate Code End-->
+</mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mockst.mocking.module.repository.dao.RepositoryInterfacePropertyDao">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.mockst.mocking.module.repository.entity.RepositoryInterfacePropertyEntity" id="repositoryInterfacePropertyMap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="type" column="type"/>
+        <result property="scope" column="scope"/>
+        <result property="rule" column="rule"/>
+        <result property="value" column="value"/>
+        <result property="required" column="required"/>
+        <result property="description" column="description"/>
+        <result property="order" column="order"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="interfaceId" column="interface_id"/>
+        <result property="creatorId" column="creator_id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <sql id="Relevance_Base_Column_List">
+    rip.id as rip_id,
+    rip.name as rip_name,
+    rip.type as rip_type,
+    rip.scope as rip_scope,
+    rip.rule as rip_rule,
+    rip.value as rip_value,
+    rip.required as rip_required,
+    rip.description as rip_description,
+    rip.order as rip_order,
+    rip.parent_id as rip_parent_id,
+    rip.interface_id as rip_interface_id,
+    rip.creator_id as rip_creator_id,
+    rip.create_time as rip_create_time,
+    rip.update_time as rip_update_time
+    </sql>
+    <!-- Custom Generate Code Start-->
+    <!-- Custom Generate Code End-->
+</mapper>

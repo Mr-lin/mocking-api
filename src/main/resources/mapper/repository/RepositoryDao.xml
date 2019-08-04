@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mockst.mocking.module.repository.dao.RepositoryDao">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.mockst.mocking.module.repository.entity.RepositoryEntity" id="repositoryMap">
+        <result property="id" column="id"/>
+        <result property="repositoryName" column="repository_name"/>
+        <result property="description" column="description"/>
+        <result property="creatorId" column="creator_id"/>
+        <result property="rVersion" column="r_version"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <sql id="Relevance_Base_Column_List">
+    r.id as r_id,
+    r.repository_name as r_repository_name,
+    r.description as r_description,
+    r.creator_id as r_creator_id,
+    r.r_version as r_r_version,
+    r.create_time as r_create_time,
+    r.update_time as r_update_time
+    </sql>
+    <!-- Custom Generate Code Start-->
+    <!-- Custom Generate Code End-->
+</mapper>

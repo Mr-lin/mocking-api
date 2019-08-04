@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!-- 驼峰转换 -->
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+        <!-- 打印查询语句 -->
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+        <!-- 开启全局懒加载 -->
+        <setting name="lazyLoadingEnabled" value="false"/>
+        <!-- 当设置为‘true'的时候，懒加载的对象可能被任何懒属性全部加载。否则，每个属性都按需加载。 -->
+        <setting name="aggressiveLazyLoading" value="true"/>
+        <!--解决，查询返回结果含null没有对应字段值问题-->
+        <setting name="callSettersOnNulls" value="true"/>
+    </settings>
+    <typeHandlers>
+        <typeHandler handler="com.esnotary.framework.mybatis.JsonTypeHandler"/>
+    </typeHandlers>
+    <objectWrapperFactory type="com.esnotary.framework.mybatis.MapWrapperFactory"/>
+    <plugins>
+        <!--分页插件-->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <property name="helperDialect" value="mysql"/>
+            <property name="reasonable" value="true"/>
+            <property name="supportMethodsArguments" value="true"/>
+            <property name="params" value="count=countSql"/>
+        </plugin>
+    </plugins>
+</configuration>

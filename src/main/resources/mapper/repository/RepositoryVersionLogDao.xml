@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mockst.mocking.module.repository.dao.RepositoryVersionLogDao">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.mockst.mocking.module.repository.entity.RepositoryVersionLogEntity" id="repositoryVersionLogMap">
+        <result property="id" column="id"/>
+        <result property="repositoryId" column="repository_id"/>
+        <result property="opUserId" column="op_user_id"/>
+        <result property="opType" column="op_type"/>
+        <result property="opUserName" column="op_user_name"/>
+        <result property="opContent" column="op_content"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <sql id="Relevance_Base_Column_List">
+    rvl.id as rvl_id,
+    rvl.repository_id as rvl_repository_id,
+    rvl.op_user_id as rvl_op_user_id,
+    rvl.op_type as rvl_op_type,
+    rvl.op_user_name as rvl_op_user_name,
+    rvl.op_content as rvl_op_content,
+    rvl.create_time as rvl_create_time,
+    rvl.update_time as rvl_update_time
+    </sql>
+    <!-- Custom Generate Code Start-->
+    <!-- Custom Generate Code End-->
+</mapper>

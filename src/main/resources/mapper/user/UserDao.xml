@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mockst.mocking.module.user.dao.UserDao">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.mockst.mocking.module.user.entity.UserEntity" id="userMap">
+        <result property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="realName" column="real_name"/>
+        <result property="password" column="password"/>
+        <result property="photo" column="photo"/>
+        <result property="departmentId" column="department_id"/>
+        <result property="roleId" column="role_id"/>
+        <result property="email" column="email"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <sql id="Relevance_Base_Column_List">
+    u.id as u_id,
+    u.username as u_username,
+    u.real_name as u_real_name,
+    u.password as u_password,
+    u.photo as u_photo,
+    u.department_id as u_department_id,
+    u.role_id as u_role_id,
+    u.email as u_email,
+    u.create_time as u_create_time,
+    u.update_time as u_update_time
+    </sql>
+
+    <!-- Custom Generate Code Start-->
+    <select id="findByCondition" resultType="java.util.Map">
+        SELECT u.*,
+        r.role_name role_name,
+        d.department_name department_name
+        FROM tb_user u LEFT JOIN tb_role r ON r.id = u.role_id
+        LEFT JOIN tb_department d ON d.id = u.department_id
+        <where>
+            <if test="realName!=null and realName!=''">
+                AND u.real_name LIKE CONCAT('%',#{realName},'%')
+            </if>
+            <if test="departmentId!=null and departmentId!=''">
+                AND u.department_id = #{departmentId}
+            </if>
+            <if test="startDate!=null and startDate!=''">
+                <![CDATA[ AND u.create_time >= DATE_FORMAT(#{startDate},'%Y-%m-%d 00:00:00') ]]>
+            </if>
+            <if test="endDate!=null and endDate!=''">
+                <![CDATA[ AND u.create_time <= DATE_FORMAT(#{endDate},'%Y-%m-%d 23:59:59') ]]>
+            </if>
+        </where>
+        order by u.update_time desc
+    </select>
+    <!-- Custom Generate Code End-->
+</mapper>

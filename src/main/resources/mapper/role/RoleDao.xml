@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mockst.mocking.module.role.dao.RoleDao">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.mockst.mocking.module.role.entity.RoleEntity" id="roleMap">
+        <result property="id" column="id"/>
+        <result property="roleName" column="role_name"/>
+        <result property="roleCode" column="role_code"/>
+        <result property="creatorId" column="creator_id"/>
+        <result property="remark" column="remark"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <sql id="Relevance_Base_Column_List">
+    r.id as r_id,
+    r.role_name as r_role_name,
+    r.role_code as r_role_code,
+    r.creator_id as r_creator_id,
+    r.remark as r_remark,
+    r.create_time as r_create_time,
+    r.update_time as r_update_time
+    </sql>
+
+    <!-- Custom Generate Code Start-->
+    <select id="findByCondition" resultType="java.util.Map">
+        SELECT r.*,
+        u.real_name creator_name
+        FROM tb_role r LEFT JOIN tb_user u on r.creator_id = u.id
+        <where>
+            <if test="roleName!=null and roleName!=''">
+                AND r.role_name LIKE CONCAT('%',#{roleName},'%')
+            </if>
+            <if test="startDate!=null and startDate!=''">
+                <![CDATA[ AND r.create_time >= DATE_FORMAT(#{startDate},'%Y-%m-%d 00:00:00') ]]>
+            </if>
+            <if test="endDate!=null and endDate!=''">
+                <![CDATA[ AND r.create_time <= DATE_FORMAT(#{endDate},'%Y-%m-%d 23:59:59') ]]>
+            </if>
+        </where>
+        order by r.update_time desc
+    </select>
+    <!-- Custom Generate Code End-->
+</mapper>
