@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mockst.mocking.module.menu.dao.MenuDao">
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.mockst.mocking.module.menu.entity.MenuEntity" id="menuMap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="sort" column="sort"/>
+        <result property="isShow" column="is_show"/>
+        <result property="permission" column="permission"/>
+        <result property="type" column="type"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <sql id="Relevance_Base_Column_List">
+    m.id as m_id,
+    m.name as m_name,
+    m.parent_id as m_parent_id,
+    m.sort as m_sort,
+    m.is_show as m_is_show,
+    m.permission as m_permission,
+    m.type as m_type,
+    m.create_time as m_create_time,
+    m.update_time as m_update_time
+    </sql>
+
+    <resultMap id="TreeMenuMap" type="com.mockst.mocking.model.menu.TreeMenu">
+        <result column="id" property="id"/>
+        <result column="label" property="label"/>
+        <collection property="children" select="findMenusByParentId" column="id"/>
+    </resultMap>
+
+    <!-- Custom Generate Code Start-->
+    <select id="findAllMenus" resultMap="TreeMenuMap">
+        SELECT id,
+        name as label,
+        parent_id
+        FROM tb_menu
+        WHERE parent_id = ''or parent_id is NULL ORDER BY `sort` ASC
+    </select>
+
+    <select id="findMenusByParentId" resultMap="TreeMenuMap">
+        SELECT id,
+        name as label,
+        parent_id
+        FROM tb_menu
+        WHERE parent_id = #{parentId}
+        ORDER BY `sort` ASC
+    </select>
+    <!-- Custom Generate Code End-->
+</mapper>

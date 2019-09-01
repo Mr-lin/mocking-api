@@ -27,8 +27,8 @@ public class RepositoryModuleEntity extends BaseEntity implements Serializable {
 	private String description;
 		
 	//排序
-    @Column(name = "order")
-	private Integer order;
+    @Column(name = "sort")
+	private Integer sort;
 		
 	//所属工程
     @Column(name = "repository_id")
@@ -67,14 +67,14 @@ public class RepositoryModuleEntity extends BaseEntity implements Serializable {
 	/**
 	 * 设置：排序
 	 */
-	public void setOrder(Integer order) {
-		this.order = order;
+	public void setSort(Integer sort) {
+		this.sort = sort;
 	}
 	/**
 	 * 获取：排序
 	 */
-	public Integer getOrder() {
-		return order;
+	public Integer getSort() {
+		return sort;
 	}
 		
 	/**
@@ -109,7 +109,7 @@ public class RepositoryModuleEntity extends BaseEntity implements Serializable {
                     " id='" + id + '\'' +
                     " moduleName='" + moduleName + '\'' +
                     " description='" + description + '\'' +
-                    " order='" + order + '\'' +
+                    " sort='" + sort + '\'' +
                     " repositoryId='" + repositoryId + '\'' +
                     " creatorId='" + creatorId + '\'' +
                     " createTime='" + createTime + '\'' +

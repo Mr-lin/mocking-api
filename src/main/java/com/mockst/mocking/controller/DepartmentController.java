@@ -9,11 +9,13 @@ import com.mockst.mocking.module.department.entity.DepartmentEntity;
 import com.mockst.mocking.module.department.service.DepartmentService;
 import com.mockst.mocking.module.role.entity.RoleEntity;
 import com.mockst.mocking.module.role.service.RoleService;
+import com.mockst.mocking.module.user.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +26,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping(WebConfigurer.API_BASE_PATH+"/department")
-public class DepartmentController {
+public class DepartmentController extends BaseAPIController{
 
     @Autowired
     private DepartmentService departmentService;
@@ -47,10 +49,12 @@ public class DepartmentController {
      * 新增
      */
     @RequestMapping("addDepartment")
-    public APIResult addDepartment(@RequestParam String departmentName,@RequestParam String remark){
+    public APIResult addDepartment(HttpServletRequest request,@RequestParam String departmentName, @RequestParam String remark){
+        UserEntity userEntity = getCurrentUser(request);
         DepartmentEntity departmentEntity = new DepartmentEntity();
         departmentEntity.setDepartmentName(departmentName);
         departmentEntity.setRemark(remark);
+        departmentEntity.setCreatorId(userEntity.getId());
         departmentService.save(departmentEntity);
         return APIResultUtil.returnSuccessResult(null);
     }

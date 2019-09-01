@@ -94,4 +94,6 @@ public interface BaseService<T extends BaseEntity> {
 
     T selectOne(T entity);
 
+    List<T> select(T entity);
+
 }

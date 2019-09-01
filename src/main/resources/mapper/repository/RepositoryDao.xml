@@ -23,5 +23,58 @@
     r.update_time as r_update_time
     </sql>
     <!-- Custom Generate Code Start-->
+    <select id="findByCondition" resultType="java.util.Map">
+        SELECT r.*,
+        u.real_name creator_name
+        FROM tb_repository r
+        LEFT JOIN tb_user u on r.creator_id = u.id
+        LEFT JOIN tb_repository_member rm on rm.repository_id = r.id
+        <where>
+            <if test="memberId!=null and memberId!=''">
+                AND (rm.user_id = #{memberId} OR r.creator_id = #{memberId})
+            </if>
+            <if test="repositoryName!=null and repositoryName!=''">
+                AND r.department_name LIKE CONCAT('%',#{repositoryName},'%')
+            </if>
+            <if test="startDate!=null and startDate!=''">
+                <![CDATA[ AND r.create_time >= DATE_FORMAT(#{startDate},'%Y-%m-%d 00:00:00') ]]>
+            </if>
+            <if test="endDate!=null and endDate!=''">
+                <![CDATA[ AND r.create_time <= DATE_FORMAT(#{endDate},'%Y-%m-%d 23:59:59') ]]>
+            </if>
+        </where>
+        order by r.update_time desc
+    </select>
+
+    <resultMap id="RepositoryInfoDTOMap" type="com.mockst.mocking.model.repository.RepositoryInfoDTO">
+        <result column="id" property="id"/>
+        <result column="repository_name"  property="repositoryName"/>
+        <result column="description" property="description"/>
+        <collection property="modules" columnPrefix="trm_" ofType="com.mockst.mocking.module.repository.entity.RepositoryModuleEntity">
+            <result column="id" property="id"/>
+            <result column="module_name" property="moduleName"/>
+        </collection>
+        <collection property="users" columnPrefix="u_" ofType="com.mockst.mocking.module.user.entity.UserEntity">
+            <result column="id" property="id"/>
+            <result column="real_name" property="realName"/>
+        </collection>
+    </resultMap>
+
+    <select id="findById" resultMap="RepositoryInfoDTOMap">
+        SELECT
+            r.id,
+            r.repository_name,
+            r.description,
+            u.id u_id,
+            u.real_name u_real_name,
+            trm.module_name trm_module_name,
+            trm.id trm_id
+        FROM
+            tb_repository r
+        LEFT JOIN tb_repository_module trm ON trm.repository_id = r.id
+        LEFT JOIN tb_repository_member rm ON r.id = rm.repository_id
+        LEFT JOIN tb_user u ON u.id = rm.user_id
+        WHERE r.id = #{repositoryId}
+    </select>
     <!-- Custom Generate Code End-->
 </mapper>

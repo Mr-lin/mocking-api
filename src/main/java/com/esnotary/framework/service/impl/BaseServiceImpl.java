@@ -97,4 +97,9 @@ public class BaseServiceImpl<T extends BaseEntity> implements BaseService<T> {
         return mapper.selectOne(entity);
     }
 
+    @Override
+    public List<T> select(T entity) {
+        return mapper.select(entity);
+    }
+
 }

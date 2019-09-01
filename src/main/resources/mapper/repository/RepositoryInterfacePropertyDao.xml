@@ -12,7 +12,7 @@
         <result property="value" column="value"/>
         <result property="required" column="required"/>
         <result property="description" column="description"/>
-        <result property="order" column="order"/>
+        <result property="sort" column="sort"/>
         <result property="parentId" column="parent_id"/>
         <result property="interfaceId" column="interface_id"/>
         <result property="creatorId" column="creator_id"/>
@@ -29,13 +29,37 @@
     rip.value as rip_value,
     rip.required as rip_required,
     rip.description as rip_description,
-    rip.order as rip_order,
+    rip.sort as rip_sort,
     rip.parent_id as rip_parent_id,
     rip.interface_id as rip_interface_id,
     rip.creator_id as rip_creator_id,
     rip.create_time as rip_create_time,
     rip.update_time as rip_update_time
     </sql>
+
     <!-- Custom Generate Code Start-->
+    <select id="findProperiesByInterfaceId"
+            resultType="com.mockst.mocking.model.repository.InterfacePropertyDTO">
+        SELECT
+            rip.id,
+            rip.`name`,
+            rip.type,
+            rip.scope,
+            rip.rule,
+            rip.`value`,
+            rip.required,
+            rip.description,
+            rip.parent_id,
+            rip.sort
+        FROM
+            tb_repository_interface_property rip
+        WHERE
+            rip.interface_id = #{interfaceId}
+        AND rip.is_delete = '0'
+        ORDER BY
+        rip.parent_id='' desc,
+        rip.sort asc
+    </select>
+
     <!-- Custom Generate Code End-->
 </mapper>

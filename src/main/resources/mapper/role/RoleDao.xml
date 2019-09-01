@@ -26,8 +26,11 @@
     <!-- Custom Generate Code Start-->
     <select id="findByCondition" resultType="java.util.Map">
         SELECT r.*,
-        u.real_name creator_name
-        FROM tb_role r LEFT JOIN tb_user u on r.creator_id = u.id
+        u.real_name creator_name,
+        GROUP_CONCAT(mr.menu_id SEPARATOR ',') menu_ids
+        FROM tb_role r
+        LEFT JOIN tb_user u on r.creator_id = u.id
+        LEFT JOIN tb_menu_role mr ON mr.role_id = r.id
         <where>
             <if test="roleName!=null and roleName!=''">
                 AND r.role_name LIKE CONCAT('%',#{roleName},'%')
@@ -39,6 +42,7 @@
                 <![CDATA[ AND r.create_time <= DATE_FORMAT(#{endDate},'%Y-%m-%d 23:59:59') ]]>
             </if>
         </where>
+        GROUP BY r.id
         order by r.update_time desc
     </select>
     <!-- Custom Generate Code End-->

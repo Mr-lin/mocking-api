@@ -40,19 +40,23 @@ public class RepositoryInterfacePropertyEntity extends BaseEntity implements Ser
 		
 	//是否必填
     @Column(name = "required")
-	private Integer required;
+	private Boolean required;
 		
 	//参数描述
     @Column(name = "description")
 	private String description;
 		
 	//排序
-    @Column(name = "order")
-	private Integer order;
+    @Column(name = "sort")
+	private Integer sort;
 		
 	//上级参数
     @Column(name = "parent_id")
 	private String parentId;
+
+	//是否删除 0未删除 1已删除
+	@Column(name = "is_delete")
+    private String isDelete;
 		
 	//所属接口
     @Column(name = "interface_id")
@@ -61,6 +65,10 @@ public class RepositoryInterfacePropertyEntity extends BaseEntity implements Ser
 	//创建者
     @Column(name = "creator_id")
 	private String creatorId;
+
+    //删除时间
+	@Column(name = "delete_time")
+	private Date deleteTime;
 								
 	/**
 	 * 设置：参数名称
@@ -130,13 +138,13 @@ public class RepositoryInterfacePropertyEntity extends BaseEntity implements Ser
 	/**
 	 * 设置：是否必填
 	 */
-	public void setRequired(Integer required) {
+	public void setRequired(Boolean required) {
 		this.required = required;
 	}
 	/**
 	 * 获取：是否必填
 	 */
-	public Integer getRequired() {
+	public Boolean getRequired() {
 		return required;
 	}
 		
@@ -156,14 +164,14 @@ public class RepositoryInterfacePropertyEntity extends BaseEntity implements Ser
 	/**
 	 * 设置：排序
 	 */
-	public void setOrder(Integer order) {
-		this.order = order;
+	public void setSort(Integer sort) {
+		this.sort = sort;
 	}
 	/**
 	 * 获取：排序
 	 */
-	public Integer getOrder() {
-		return order;
+	public Integer getSort() {
+		return sort;
 	}
 		
 	/**
@@ -178,7 +186,15 @@ public class RepositoryInterfacePropertyEntity extends BaseEntity implements Ser
 	public String getParentId() {
 		return parentId;
 	}
-		
+
+	public String getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(String isDelete) {
+		this.isDelete = isDelete;
+	}
+
 	/**
 	 * 设置：所属接口
 	 */
@@ -204,8 +220,16 @@ public class RepositoryInterfacePropertyEntity extends BaseEntity implements Ser
 	public String getCreatorId() {
 		return creatorId;
 	}
-					
-    @Override
+
+	public Date getDeleteTime() {
+		return deleteTime;
+	}
+
+	public void setDeleteTime(Date deleteTime) {
+		this.deleteTime = deleteTime;
+	}
+
+	@Override
     public String toString() {
         return "RepositoryInterfacePropertyEntity{" +
                     " id='" + id + '\'' +
@@ -216,12 +240,14 @@ public class RepositoryInterfacePropertyEntity extends BaseEntity implements Ser
                     " value='" + value + '\'' +
                     " required='" + required + '\'' +
                     " description='" + description + '\'' +
-                    " order='" + order + '\'' +
+                    " sort='" + sort + '\'' +
                     " parentId='" + parentId + '\'' +
+					" isDelete='" + isDelete+ '\'' +
                     " interfaceId='" + interfaceId + '\'' +
                     " creatorId='" + creatorId + '\'' +
                     " createTime='" + createTime + '\'' +
                     " updateTime='" + updateTime + '\'' +
+					" deleteTime='" + deleteTime + '\'' +
                     '}';
     }
 

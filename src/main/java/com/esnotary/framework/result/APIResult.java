@@ -13,6 +13,9 @@ public class APIResult implements Serializable{
     private String message;
     private Object data;
 
+    public APIResult() {
+    }
+
     public APIResult(String code, String message, Object data) {
         this.code = code;
         this.message = message;

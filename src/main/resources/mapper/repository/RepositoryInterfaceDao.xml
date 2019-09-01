@@ -10,7 +10,7 @@
         <result property="url" column="url"/>
         <result property="method" column="method"/>
         <result property="status" column="status"/>
-        <result property="order" column="order"/>
+        <result property="sort" column="sort"/>
         <result property="moduleId" column="module_id"/>
         <result property="creatorId" column="creator_id"/>
         <result property="createTime" column="create_time"/>
@@ -24,7 +24,7 @@
     ri.url as ri_url,
     ri.method as ri_method,
     ri.status as ri_status,
-    ri.order as ri_order,
+    ri.sort as ri_sort,
     ri.module_id as ri_module_id,
     ri.creator_id as ri_creator_id,
     ri.create_time as ri_create_time,

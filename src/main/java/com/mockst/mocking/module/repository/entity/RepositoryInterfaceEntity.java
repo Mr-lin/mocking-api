@@ -39,8 +39,8 @@ public class RepositoryInterfaceEntity extends BaseEntity implements Serializabl
 	private Integer status;
 		
 	//排序
-    @Column(name = "order")
-	private Integer order;
+    @Column(name = "sort")
+	private Integer sort;
 		
 	//所属模块
     @Column(name = "module_id")
@@ -118,14 +118,14 @@ public class RepositoryInterfaceEntity extends BaseEntity implements Serializabl
 	/**
 	 * 设置：排序
 	 */
-	public void setOrder(Integer order) {
-		this.order = order;
+	public void setSort(Integer sort) {
+		this.sort = sort;
 	}
 	/**
 	 * 获取：排序
 	 */
-	public Integer getOrder() {
-		return order;
+	public Integer getSort() {
+		return sort;
 	}
 		
 	/**
@@ -163,7 +163,7 @@ public class RepositoryInterfaceEntity extends BaseEntity implements Serializabl
                     " url='" + url + '\'' +
                     " method='" + method + '\'' +
                     " status='" + status + '\'' +
-                    " order='" + order + '\'' +
+                    " sort='" + sort + '\'' +
                     " moduleId='" + moduleId + '\'' +
                     " creatorId='" + creatorId + '\'' +
                     " createTime='" + createTime + '\'' +

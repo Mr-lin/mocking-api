@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>接口文档</title>
+    <style>
+        pre {
+            margin: 0;
+            padding: .5rem .75rem;
+            border: 1px solid #d1d5da;
+            border-radius: .4rem;
+            background-color: #f0f0f0;
+            white-space: pre-wrap;
+        }
+        pre {
+            display: block;
+            font-size: 87.5%;
+            color: #212529;
+            font-family: SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;
+        }
+        pre.body {
+            max-height: 90vh;
+            overflow: auto;
+        }
+        table {
+            background-color: transparent;
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+        .table-bordered {
+            border: 1px solid #ddd;
+        }
+        .table {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 20px;
+        }
+        .table>thead>tr>th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #ddd;
+            padding: 8px;
+            line-height: 1.42857143;
+            vertical-align: top;
+            border-top: 1px solid #ddd;
+        }
+        .table-bordered>thead>tr>th {
+            border: 1px solid #ddd;
+            border-bottom-width: 2px;
+        }
+        .table-bordered>tbody>tr>td {
+            border: 1px solid #ddd;
+        }
+        .table-bordered>tbody>tr>td {
+            padding: 8px;
+            line-height: 1.42857143;
+            vertical-align: top;
+            border-top: 1px solid #ddd;
+        }
+        tr {
+            display: table-row;
+            vertical-align: inherit;
+            border-color: inherit;
+        }
+        th {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<h1>模块名</h1>
+<h2>接口名</h2>
+<h3>请求地址</h3>
+<div>/opensignapi/sign/auth/getToken.json</div>
+<h3>说明</h3>
+<div>获取token</div>
+<h3>请求参数</h3>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th style="width: 15rem;">名称</th>
+        <th style="width: 3rem;">必填</th>
+        <th style="width: 4rem;">类型</th>
+        <th>备注</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>name</td>
+        <td>是</td>
+        <td>String</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="padding-left: 1rem;">name</td>
+        <td>是</td>
+        <td>String</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td style="padding-left: 2rem;">name</td>
+        <td>是</td>
+        <td>String</td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+<h3>响应参数</h3>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th style="width: 15rem;">名称</th>
+        <th style="width: 3rem;">必填</th>
+        <th style="width: 4rem;">类型</th>
+        <th>备注</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>name</td>
+        <td>是</td>
+        <td>String</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>name</td>
+        <td>是</td>
+        <td>String</td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+<h3>响应示例</h3>
+<pre class="body">
+    {
+    "name":"zhangsan",
+    "age":18
+    }
+</pre>
+</body>
+</html>

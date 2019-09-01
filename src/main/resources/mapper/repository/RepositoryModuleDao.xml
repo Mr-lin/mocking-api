@@ -7,7 +7,7 @@
         <result property="id" column="id"/>
         <result property="moduleName" column="module_name"/>
         <result property="description" column="description"/>
-        <result property="order" column="order"/>
+        <result property="sort" column="sort"/>
         <result property="repositoryId" column="repository_id"/>
         <result property="creatorId" column="creator_id"/>
         <result property="createTime" column="create_time"/>
@@ -18,7 +18,7 @@
     rm.id as rm_id,
     rm.module_name as rm_module_name,
     rm.description as rm_description,
-    rm.order as rm_order,
+    rm.sort as rm_sort,
     rm.repository_id as rm_repository_id,
     rm.creator_id as rm_creator_id,
     rm.create_time as rm_create_time,

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>接口文档</title>
+    <style>
+        pre {
+            margin: 0;
+            padding: .5rem .75rem;
+            border: 1px solid #d1d5da;
+            border-radius: .4rem;
+            background-color: #f0f0f0;
+            white-space: pre-wrap;
+        }
+        pre {
+            display: block;
+            font-size: 87.5%;
+            color: #212529;
+            font-family: SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;
+        }
+        pre.body {
+            max-height: 90vh;
+            overflow: auto;
+        }
+        table {
+            background-color: transparent;
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+        .table-bordered {
+            border: 1px solid #ddd;
+        }
+        .table {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 20px;
+        }
+        .table>thead>tr>th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #ddd;
+            padding: 8px;
+            line-height: 1.42857143;
+            vertical-align: top;
+            border-top: 1px solid #ddd;
+        }
+        .table-bordered>thead>tr>th {
+            border: 1px solid #ddd;
+            border-bottom-width: 2px;
+        }
+        .table-bordered>tbody>tr>td {
+            border: 1px solid #ddd;
+        }
+        .table-bordered>tbody>tr>td {
+            padding: 8px;
+            line-height: 1.42857143;
+            vertical-align: top;
+            border-top: 1px solid #ddd;
+        }
+        tr {
+            display: table-row;
+            vertical-align: inherit;
+            border-color: inherit;
+        }
+        th {
+            text-align: left;
+        }
+        /*避免表格被分页*/
+        thead {
+            display: table-row-group;
+        }
+        tr {
+            page-break-before: always;
+            page-break-after: always;
+            page-break-inside: avoid;
+        }
+        table {
+            word-wrap: break-word;
+        }
+        table td {
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+#foreach($module in $modules)
+<h1>$module.moduleName</h1>
+    #foreach($interface in $module.interfaces)
+<h2>$interface.interfaceName</h2>
+<h3>请求地址</h3>
+<div>$interface.url</div>
+<h3>说明</h3>
+<div>$!{interface.description}</div>
+<h3>请求参数</h3>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th style="width: 15rem;">名称</th>
+        <th style="width: 3rem;">必填</th>
+        <th style="width: 4rem;">类型</th>
+        <th>备注</th>
+    </tr>
+    </thead>
+    <tbody>
+    #foreach($property in $interface.requestProperties)
+    <tr>
+        <td #if($property.depth>0) style="padding-left: ${property.depth}rem;"#end>$property.name</td>
+        <td>#if($property.required)是#else 否#end</td>
+        <td>$property.type</td>
+        <td>$!{property.description}</td>
+    </tr>
+    #end
+    </tbody>
+</table>
+<h3>响应参数</h3>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th style="width: 15rem;">名称</th>
+        <th style="width: 3rem;">必填</th>
+        <th style="width: 4rem;">类型</th>
+        <th>备注</th>
+    </tr>
+    </thead>
+    <tbody>
+    #foreach($property in $interface.responseProperties)
+    <tr>
+        <td #if($property.depth>0) style="padding-left: ${property.depth}rem;"#end>$property.name</td>
+        <td>#if($property.required)是#else 否#end</td>
+        <td>$property.type</td>
+        <td>$!{property.description}</td>
+    </tr>
+    #end
+    </tbody>
+</table>
+<h3>响应示例</h3>
+<pre class="body">
+$!{interface.responseExample}
+</pre>
+    #end
+#end
+</body>
+</html>

@@ -6,12 +6,15 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import com.mockst.mocking.interceptor.APILoginInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 import java.io.IOException;
@@ -28,6 +31,9 @@ public class WebConfigurer extends WebMvcConfigurationSupport {
 
     public final static String API_BASE_PATH = "/api";
 
+    @Autowired
+    private APILoginInterceptor apiLoginInterceptor;
+
     /**
      * 解决跨域
      * @return
@@ -40,6 +46,22 @@ public class WebConfigurer extends WebMvcConfigurationSupport {
         filterRegistrationBean.setEnabled(true);
         filterRegistrationBean.addUrlPatterns("/*");
         return filterRegistrationBean;
+    }
+
+    /**
+     * 拦截器注入
+     * @param registry
+     */
+    @Override
+    protected void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(threadContextMDCInterceptor)
+//                .addPathPatterns("/**");
+//        registry.addInterceptor(apiInterceptor)
+//                .addPathPatterns(API_BASE_PATH+"/**")
+//                .addPathPatterns(APP_BASE_PATH+"/**");
+        registry.addInterceptor(apiLoginInterceptor)
+                .addPathPatterns(API_BASE_PATH+"/**");
+        super.addInterceptors(registry);
     }
 
     //定义时间格式转换器
