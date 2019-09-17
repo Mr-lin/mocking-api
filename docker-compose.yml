@@ -1,0 +1,10 @@
+version: '2'
+services:
+  mocking-api:
+    build: .
+    volumes:
+      - ./log:/home/mocking
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: test

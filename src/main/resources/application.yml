@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: dev
   datasource:
     url: jdbc:mysql://192.168.50.202:3306/mocking?charset=utf8mb4&useSSL=false&allowMultiQueries=true
     username: root
@@ -21,3 +23,7 @@ spring:
 mybatis:
   mapperLocations: classpath:mapper/**/*.xml
   configLocation: classpath:mybatis/mybatis.xml
+#日志
+logging:
+  config: classpath:logback-spring.xml
+  path: /home/mocking
